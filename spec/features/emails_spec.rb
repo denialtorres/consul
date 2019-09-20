@@ -357,8 +357,7 @@ describe "Emails" do
 
     let(:author)   { create(:user, :level_two) }
     let(:budget)   { create(:budget) }
-    let(:group)    { create(:budget_group, name: "Health", budget: budget) }
-    let!(:heading) { create(:budget_heading, name: "More hospitals", group: group) }
+    let!(:heading) { create(:budget_heading, name: "More hospitals", budget: budget) }
 
     scenario "Investment created" do
       login_as(author)
@@ -385,7 +384,7 @@ describe "Emails" do
 
     scenario "Unfeasible investment" do
       budget.update(phase: "valuating")
-      investment = create(:budget_investment, author: author, budget: budget, heading: heading)
+      investment = create(:budget_investment, author: author, budget: budget)
 
       valuator = create(:valuator)
       investment.valuators << valuator
